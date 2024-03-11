@@ -1,0 +1,9 @@
+{
+  "name": "@justsearch/root",
+  "version": "0.0.1",
+  "description": "JustSearch",
+  "main": "index.js",
+  "repository": "git@github.com:lucasrainett/justsearch.git",
+  "author": "Lucas Rainett <lucas@rainett.dev>",
+  "license": "MIT"
+}
