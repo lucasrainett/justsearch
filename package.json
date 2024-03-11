@@ -3,7 +3,28 @@
   "version": "0.0.1",
   "description": "JustSearch",
   "main": "index.js",
+  "private": true,
   "repository": "git@github.com:lucasrainett/justsearch.git",
   "author": "Lucas Rainett <lucas@rainett.dev>",
-  "license": "MIT"
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "format": "prettier --write --ignore-unknown .",
+    "prepare": "yarn husky install",
+    "build": "lerna run build",
+    "start": "lerna run start",
+    "test": "lerna run test",
+    "clean": "rm -rf node_modules ./packages/*/{dist,node_modules,build,coverage}",
+    "reset": "yarn clean && yarn && yarn build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "husky": "^9.0.11",
+    "lerna": "^8.1.2",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
+  }
 }

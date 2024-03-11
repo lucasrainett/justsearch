@@ -1,0 +1,15 @@
+{
+  "tabWidth": 4,
+  "singleQuote": false,
+  "useTabs": true,
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "options": {
+        "parser": "json",
+        "useTabs": false,
+        "tabWidth": 2
+      }
+    }
+  ]
+}
