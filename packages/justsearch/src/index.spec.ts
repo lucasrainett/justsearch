@@ -1,4 +1,21 @@
-import { JustSearch, MemoryStore, Person, SearchIndex } from "./index";
+import { JustSearch, MemoryStore, SearchIndex } from "./index";
+
+interface Person {
+	id: string;
+	name: string;
+	email: string;
+	deep: {
+		test1: string;
+		list: Array<Address>;
+	};
+	test: Array<string>;
+	list: Array<Address>;
+}
+
+interface Address {
+	street: string;
+	number: string;
+}
 
 describe("JustSearch", () => {
 	it("should work", () => {
@@ -10,10 +27,10 @@ describe("JustSearch", () => {
 
 		const index = new JustSearch<Person>(store, {
 			id: "id",
-			index: {
-
+			rules: {
+				email: { index: true },
+				name: { store: true },
 			},
-			index2 : {}
 		});
 
 		const person1: Person = {
@@ -22,9 +39,10 @@ describe("JustSearch", () => {
 			email: "email@example.com",
 			deep: {
 				test1: "deep1",
+				list: [],
 			},
 			list: [],
-			test: []
+			test: [],
 		};
 
 		index.add(person1);
