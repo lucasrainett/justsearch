@@ -1,4 +1,4 @@
-import { JustSearch, MemoryStore, SearchIndex } from "./index";
+import { JustSearch, MemoryStore } from "./index";
 
 interface Person {
 	id: string;

@@ -1,14 +1,5 @@
-type Paths<T extends object> = {
-	[K in keyof T]-?: K extends string | number
-		? T[K] extends any[]
-			? T[K][number] extends object
-				? `${K}[].${Paths<T[K][number]>}`
-				: `${K}[]`
-			: T[K] extends object
-				? `${K}.${Paths<T[K]>}`
-				: K
-		: never;
-}[keyof T];
+import { KeysOfType, Paths } from "./types";
+import { isObject } from "./util";
 
 export interface FieldConfiguration {
 	index?: boolean;
@@ -30,20 +21,12 @@ export class MemoryStore implements Store {
 	}
 }
 
-type KeysOfType<T extends object, J> = {
-	[K in keyof T]: T[K] extends J ? K : never;
-}[keyof T];
-
 export interface Options<T extends {}> {
 	id: KeysOfType<T, string | number>;
 	rules: Partial<Record<Paths<T>, FieldConfiguration>>;
 }
 
 export interface StringIndexOptions {}
-
-function isObject(value: any): value is object {
-	return typeof value === "object" && !Array.isArray(value) && value !== null;
-}
 
 function isTextIndexEntry(value: any): value is TextIndexEntry {
 	if (isObject(value)) {
@@ -95,8 +78,6 @@ export class TextIndex {
 								idOrValues.map(({ id, value }) => [id, value]),
 							)
 						: idOrValues;
-
-		console.log(allRecords);
 	}
 
 	public async remove(id: string): Promise<void> {}
