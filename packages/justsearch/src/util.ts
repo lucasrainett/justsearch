@@ -13,3 +13,13 @@ export function unique<K, T extends K[]>(value: K, index: number, array: T) {
 export function loop<T>(total: number, loopFunction: (index: number) => T) {
 	return createArray(total).map((_, index) => loopFunction(index));
 }
+
+export function mapObject<T extends object, J>(
+	object: T,
+	mapFunction: (entry: [keyof T, T[keyof T]]) => [keyof T, J]
+): { [key in keyof T]: J } {
+	const entries = Object.entries(object) as Array<[keyof T, T[keyof T]]>;
+	return Object.fromEntries(entries.map(mapFunction)) as {
+		[key in keyof T]: J;
+	};
+}

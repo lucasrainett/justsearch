@@ -21,7 +21,9 @@ describe("JustSearch", () => {
 	it("should work", async () => {
 		const store = new MemoryStore();
 
-		const stringIndex = new JustSearch.TextIndex(store, {});
+		const stringIndex = new JustSearch.TextIndex(store, {
+			minTokenLength: 1,
+		});
 
 		await stringIndex.add("1", "test1");
 		await stringIndex.add({ id: "2", value: "test2" });
@@ -35,7 +37,7 @@ describe("JustSearch", () => {
 			"7": "test7",
 		});
 
-		await stringIndex.search("test");
+		expect(await stringIndex.search("est2")).toEqual(["2"]);
 
 		// const data: SearchIndex = {};
 		// store.import(data).then();
